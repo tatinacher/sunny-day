@@ -1,12 +1,13 @@
 import * as express from "express";
-import { renderer } from "./renderer";
+import { mainPage, cityPage } from "./renderer";
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.static("public"));
 
-app.get("*", (req, res) => renderer(req, res));
+app.get("/", (req, res) => mainPage(req, res));
+app.get("/city/:id", (req, res) => cityPage(req, res));
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

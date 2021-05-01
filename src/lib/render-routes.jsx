@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import { RandomCityPage } from "../pages/random-city";
+import { RandomCityPage, CityPage } from "../pages";
 
 const routes = [
   { path: "/", render: <RandomCityPage />, exact: true },
-  // { path: "/add-card", render: <AddCard />, exact: true },
+  { path: "/city/:id", render: <CityPage />, exact: true },
 ];
 
 export const Routes = () => (

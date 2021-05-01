@@ -5,10 +5,10 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { ServerStyleSheet } from "styled-components";
 
-import { cityReducer } from "../features/cities";
+import { cityReducer } from "../features/city";
 import { App } from "../App";
-import { cities } from "./initial-data";
-import { units } from "../lib/constants";
+import { cities, url } from "../lib/initial-data";
+import { randomNumber } from "../lib/random";
 
 const fetch = require("node-fetch");
 
@@ -17,10 +17,10 @@ require("dotenv").config();
 const createStore = (result) =>
   configureStore({
     reducer: {
-      cities: cityReducer,
+      city: cityReducer,
     },
     preloadedState: {
-      cities: result,
+      city: result,
     },
   });
 
@@ -53,25 +53,16 @@ const createPage = (req, store) => {
       </html>`;
 };
 
-function randomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
-
-const mainPage = (req, res) =>
-  fetch(
-    `http://api.openweathermap.org/data/2.5/forecast?q=${
-      cities[randomNumber(0, cities.length)].name
-    }&appid=${process.env.WEATHER_API_KEY}&units=${units.metric.name}`
-  )
+export const cityPage = (req, res) =>
+  fetch(url(req.params.id))
     .then((res) => res.json())
     .then((result) => createStore(result))
     .then((store) => createPage(req, store))
     .then((render) => res.send(render));
 
-// const pages = {
-//   "/": mainPage,
-// };
-
-export const renderer = (req, res) => {
-  mainPage(req, res);
-};
+export const mainPage = (req, res) =>
+  fetch(url(cities[randomNumber(0, cities.length)].name))
+    .then((res) => res.json())
+    .then((result) => createStore(result))
+    .then((store) => createPage(req, store))
+    .then((render) => res.send(render));

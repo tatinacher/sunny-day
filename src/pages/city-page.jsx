@@ -1,24 +1,27 @@
 import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
-import { randomNumber } from "../lib/random";
-import { units } from "../lib/constants";
-import { cities } from "../lib/initial-data";
 import { fetchCity } from "../features/city";
+import { units } from "../lib/constants";
 
-export const RandomCityPage = () => {
-  const { city, list } = useSelector((state) => state.city);
-  const { name, country, population } = city;
+export const CityPage = () => {
+  const { id } = useParams();
+
   const dispatch = useDispatch();
+  const { city, list } = useSelector((state) => state.city);
 
-  // fix -> not request after ssr
+  const { name, country, population } = city;
+
   React.useEffect(() => {
-    const randomCity = cities[randomNumber(0, cities.length)].name;
-    dispatch(fetchCity(randomCity));
-  }, [dispatch]);
+    if (id && name.toLowerCase() !== id) {
+      dispatch(fetchCity(id));
+    }
+  }, [id]);
 
-  if (!name) return null;
+  if (!name || name.toLowerCase() !== id) return null;
+
   const [temperature_now, ...other] = list;
 
   return (

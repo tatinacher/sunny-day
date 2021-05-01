@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 export const Navbar = () => (
   <Menu>
     <Link to="/">Home</Link>
-    <Link to="/add-card">Add New Card</Link>
+    <Link to="/city/saint petersburg">Saint Peterburg</Link>
+    <Link to="/city/moscow">Moscow</Link>
   </Menu>
 );
 
