@@ -5,7 +5,9 @@ import { Global } from "./global";
 
 export const App = () => (
   <Global>
-    <Navbar />
-    <Routes />
+    <div style={{ display: "flex" }}>
+      <Navbar />
+      <Routes />
+    </div>
   </Global>
 );

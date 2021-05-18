@@ -7,8 +7,7 @@ import { ServerStyleSheet } from "styled-components";
 
 import { cityReducer } from "../features/city";
 import { App } from "../App";
-import { cities, url } from "../lib/initial-data";
-import { randomNumber } from "../lib/random";
+import { url } from "../lib/initial-data";
 
 const fetch = require("node-fetch");
 
@@ -60,9 +59,8 @@ export const cityPage = (req, res) =>
     .then((store) => createPage(req, store))
     .then((render) => res.send(render));
 
-export const mainPage = (req, res) =>
-  fetch(url(cities[randomNumber(0, cities.length)].name))
-    .then((res) => res.json())
-    .then((result) => createStore(result))
-    .then((store) => createPage(req, store))
-    .then((render) => res.send(render));
+export const mainPage = (req, res) => {
+  const store = createStore();
+  const render = createPage(req, store);
+  res.send(render);
+};

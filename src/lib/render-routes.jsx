@@ -1,11 +1,12 @@
 import * as React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
-import { RandomCityPage, CityPage } from "../pages";
+import { MainPage, CityPage, CityWeatherPage } from "../pages";
 
 const routes = [
-  { path: "/", render: <RandomCityPage />, exact: true },
-  { path: "/city/:id", render: <CityPage />, exact: true },
+  { path: "/", render: <MainPage />, exact: true },
+  { path: "/city/forecast/:id", render: <CityPage />, exact: true },
+  { path: "/city/weather/:id", render: <CityWeatherPage />, exact: true },
 ];
 
 export const Routes = () => (

@@ -20,7 +20,6 @@ export const request = async ({ url, method, params = {} }) => {
       throw new Error(result);
     }
 
-    console.log(result);
     return result;
   } catch (error) {
     throw new Error(error);

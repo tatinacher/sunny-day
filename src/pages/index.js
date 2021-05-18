@@ -1,2 +1,3 @@
-export { CityPage } from "./city-page";
-export { RandomCityPage } from "./random-city";
+export { CityPage } from "./city-forecast-page";
+export { CityWeatherPage } from "./city-weather-page";
+export { MainPage } from "./main-page";

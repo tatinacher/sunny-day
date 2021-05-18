@@ -2,19 +2,31 @@ import * as React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import { citiesWeather } from "../lib/constants";
+
 export const Navbar = () => (
   <Menu>
     <Link to="/">Home</Link>
-    <Link to="/city/saint petersburg">Saint Peterburg</Link>
-    <Link to="/city/moscow">Moscow</Link>
+    {citiesWeather.map(({ name, url }) => (
+      <Link to={url} key={url}>
+        {name}
+      </Link>
+    ))}
   </Menu>
 );
 
 export const Menu = styled.div`
   display: flex;
+  box-sizing: border-box;
   background-color: #f5f5f5;
-  padding: 30px;
+  flex-direction: column;
+  font-size: 30px;
+  padding-top: 45px;
   a {
-    padding: 0 30px;
+    padding: 10px 30px;
+    text-decoration: none;
+    color: black;
+    font-weight: 300;
+    letter-spacing: 3px;
   }
 `;

@@ -1,7 +1,7 @@
 import { units } from "./constants";
 
 export const url = (city) =>
-  `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${process.env.WEATHER_API_KEY}&units=${units.metric.name}`;
+  `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.WEATHER_API_KEY}&units=${units.metric.name}`;
 
 export const cities = [
   { id: 1, name: "new york", content: "NY" },

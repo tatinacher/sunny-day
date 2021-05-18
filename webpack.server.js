@@ -6,11 +6,15 @@ const webpackNodeExternals = require("webpack-node-externals");
 const config = {
   target: "node",
   mode: "production",
-  entry: ["@babel/polyfill", "./src/server/index.js"],
+  context: path.resolve(__dirname, "src"),
+  entry: ["@babel/polyfill", "./server/index.js"],
   externals: [webpackNodeExternals()],
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "build"),
+  },
+  module: {
+    rules: [{ test: /\.png$/, loader: "url-loader" }],
   },
 };
 
